@@ -42,9 +42,9 @@ namespace Sound2Play_Winform
         SpeechSynthesizer Victor = new SpeechSynthesizer();
         Random random = new Random();
         string QEvent;
-        string ProcWindow;
+        //string ProcWindow;
         //double timer = 10;
-        int count = 1;
+        //int count = 1;
 
         private OleDbConnection conn;
         private OleDbCommand comm;
@@ -58,7 +58,13 @@ namespace Sound2Play_Winform
         private void BuildConnection()
         {
             conn = new OleDbConnection();
-            conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=s:\Documents\Visual Studio 2013\Projects\VICTOR.accdb;Persist Security Info=False;";
+            conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=s:\Documents\Visual Studio 2013\Projects\Sound2Play_Winform-backup4#\VICTOR.accdb;Persist Security Info=False;";
+
+            //conn.ConnectionString = @"Data Source=\commands\VICTOR.accdb";
+            //string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string path = (System.IO.Path.GetDirectoryName(executable));
+            //AppDomain.CurrentDomain.SetData("commands", path);
+
             conn.Open();
             comm = new OleDbCommand();
             comm.Connection = conn;
@@ -86,6 +92,9 @@ namespace Sound2Play_Winform
                     isVictorOn = false;
                     Victor.Speak("Data missing");
                     MessageBox.Show(ex.Message);
+                    conn.Close();
+
+                    return;
                 }
                 finally
                 {
@@ -177,6 +186,9 @@ namespace Sound2Play_Winform
                 case "goodbye victor":
                 case "close":
                 case "close victor":
+                case "byebye":
+                case "bye bye":
+                case "bye bye victor":
                     Victor.Speak("Until next time");
                     Close();
                     break;

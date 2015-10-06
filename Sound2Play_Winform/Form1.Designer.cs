@@ -40,6 +40,7 @@
             this.rbKeepGoing = new System.Windows.Forms.RadioButton();
             this.rbManulPlay = new System.Windows.Forms.RadioButton();
             this.canvas = new System.Windows.Forms.Panel();
+            this.rbKeepGoing2 = new System.Windows.Forms.RadioButton();
             this.btnVoiceControl = new System.Windows.Forms.Button();
             this.lbCompositUpForce = new System.Windows.Forms.Label();
             this.lbGravity = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@
             this.sbSoundDivisor = new System.Windows.Forms.VScrollBar();
             this.btnGo = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.rbKeepGoing2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.ufo)).BeginInit();
             this.canvas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -178,6 +178,18 @@
             this.canvas.Name = "canvas";
             this.canvas.Size = new System.Drawing.Size(978, 744);
             this.canvas.TabIndex = 8;
+            // 
+            // rbKeepGoing2
+            // 
+            this.rbKeepGoing2.AutoSize = true;
+            this.rbKeepGoing2.Location = new System.Drawing.Point(215, 195);
+            this.rbKeepGoing2.Name = "rbKeepGoing2";
+            this.rbKeepGoing2.Size = new System.Drawing.Size(248, 24);
+            this.rbKeepGoing2.TabIndex = 19;
+            this.rbKeepGoing2.TabStop = true;
+            this.rbKeepGoing2.Text = "Sound Value Control Direction";
+            this.rbKeepGoing2.UseVisualStyleBackColor = true;
+            this.rbKeepGoing2.CheckedChanged += new System.EventHandler(this.rbKeepGoing2_CheckedChanged);
             // 
             // btnVoiceControl
             // 
@@ -322,18 +334,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
-            // 
-            // rbKeepGoing2
-            // 
-            this.rbKeepGoing2.AutoSize = true;
-            this.rbKeepGoing2.Location = new System.Drawing.Point(215, 195);
-            this.rbKeepGoing2.Name = "rbKeepGoing2";
-            this.rbKeepGoing2.Size = new System.Drawing.Size(248, 24);
-            this.rbKeepGoing2.TabIndex = 19;
-            this.rbKeepGoing2.TabStop = true;
-            this.rbKeepGoing2.Text = "Sound Value Control Direction";
-            this.rbKeepGoing2.UseVisualStyleBackColor = true;
-            this.rbKeepGoing2.CheckedChanged += new System.EventHandler(this.rbKeepGoing2_CheckedChanged);
             // 
             // Sound2Play
             // 
