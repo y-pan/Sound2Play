@@ -24,8 +24,8 @@ namespace Sound2Play_Winform
     {
         // =========================
         int soundValue = 0;
-        int height; // canvas height
-        int width; // canvas width
+        int canvasHeight; // canvas height
+        int canvasWidth; // canvas width
         //bool isGo = false;
         bool keepGoingUp = false;
         int ufoOriginalHeight;
@@ -117,7 +117,7 @@ namespace Sound2Play_Winform
                 case "go east":
                 case "right":
                 case "go right":
-                    if (ufo.Left < width - ufoOriginalWidth - 30)
+                    if (ufo.Left < canvasWidth - ufoOriginalWidth - 30)
                     {
                         ufo.Left += 30;
                     }
@@ -153,7 +153,7 @@ namespace Sound2Play_Winform
                 case "south":
                 case "go south":
                 case "three":
-                    if (ufo.Top > height - ufoOriginalHeight - 20)
+                    if (ufo.Top > canvasHeight - ufoOriginalHeight - 20)
                     {
                         ufo.Top += 20;
                     }
@@ -212,8 +212,8 @@ namespace Sound2Play_Winform
             MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
             var devices = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
             comboBox1.Items.AddRange(devices.ToArray());
-            height = canvas.Height;
-            width = canvas.Width;
+            canvasHeight = canvas.Height;
+            canvasWidth = canvas.Width;
             ufoOriginalHeight = ufo.Height;
             ufoOriginalWidth = ufo.Width;
             sbSoundDivisor.Minimum = 1;
@@ -292,9 +292,9 @@ namespace Sound2Play_Winform
                         ufo.Height = ufo.Height * 3 / 5;
                         keepGoingUp = !keepGoingUp;
                     }
-                    else if (ufo.Top >= height - ufo.Height)
+                    else if (ufo.Top >= canvasHeight - ufo.Height)
                     {
-                        ufo.Top = height - ufo.Height - 2;
+                        ufo.Top = canvasHeight - ufo.Height - 2;
                         ufo.Height = ufo.Height * 3 / 5;
                         keepGoingUp = !keepGoingUp;
                     }
@@ -309,9 +309,78 @@ namespace Sound2Play_Winform
                 {
                     lbResult.Visible = false;
                 }
-            }            
+            }
+            else if (rbKeepGoing2.Checked)
+            {
+                if (soundValue > soundThreshold)
+                {
+                    goWithDirectionBySoundValue();
+                }
+            }
                       
-            lbUfoHeight.Text = string.Format("Height: {0} out of {1}", height - ufo.Top, height);
+            lbUfoHeight.Text = string.Format("Height: {0} out of {1}", canvasHeight - ufo.Top, canvasHeight);
+        }
+
+        public void goWithDirectionBySoundValue()
+        {
+            soundForce = soundValue / soundDivisor;
+            switch (soundValue % 12)
+            {
+                case 0:
+                case 1:
+                case 2:
+                    if (ufo.Top < canvasHeight - ufoOriginalHeight)
+                    {
+                        ufo.Top += soundForce; // go down
+                    }
+                    else
+                    {
+                        ufo.Top = canvasHeight - ufoOriginalHeight;
+                    }
+                    break;
+
+                case 3:
+                case 4:
+                case 5:
+                    if (ufo.Top > 0)
+                    {
+                        ufo.Top -= soundForce;// go up
+                    }
+                    else
+                    {
+                        ufo.Top = 0;
+                    }
+                    break;
+
+                case 6:
+                case 7:
+                case 8:
+                    if (ufo.Left < canvasWidth - ufoOriginalWidth)
+                    {
+                        ufo.Left += soundForce; // go right
+                    }
+                    else
+                    {
+                        ufo.Left = canvasWidth - ufoOriginalWidth;
+                    }
+                    break;
+
+                case 9:
+                case 10:
+                case 11:
+                    if (ufo.Left > 0)
+                    {
+                        ufo.Left -= soundForce; // go left
+                    }
+                    else
+                    {
+                        ufo.Left = 0;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         public void goUpAsSound(bool up)
@@ -324,7 +393,7 @@ namespace Sound2Play_Winform
                     ufo.Top -= soundForce;
                     break;
                 case false:
-                    ufo.Top += soundValue / soundDivisor;
+                    ufo.Top += soundForce;
                     break;
             }
 
@@ -341,9 +410,10 @@ namespace Sound2Play_Winform
 
         // to add +++++++++++++++++++++++++++++++++++
 
+
         public bool hasCollision()
         {
-            if (ufo.Top >= height - ufo.Height || ufo.Top <= 0)
+            if (ufo.Top >= canvasHeight - ufo.Height || ufo.Top <= 0)
             {
                 lbResult.Text = "Sounds like over~~";
                 lbResult.Visible = true;
@@ -361,14 +431,34 @@ namespace Sound2Play_Winform
         {
             timer.Stop();
             timer.Start();
-            ufo.Top = height / 5;
+            ufo.Top = canvasHeight / 5;
             lbResult.Visible = false;            
         }
 
         private void Sound2Play_SizeChanged(object sender, EventArgs e)
         {
-            height = canvas.Height;
-            width = canvas.Width;
+            canvasHeight = canvas.Height;
+            canvasWidth = canvas.Width;
+        }
+        private void rbKeepGoing2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbKeepGoing2.Checked)
+            {
+                timer.Stop();
+                timer.Start();
+
+                sbGravity.Visible = false;
+                lbGravity.Visible = false;
+                lbUfoGravity.Visible = false;
+                sbGravity.Value = 0;
+                gravity = 0;                
+            }
+            else
+            {
+                sbGravity.Visible = true;
+                lbGravity.Visible = true;
+                lbUfoGravity.Visible = true;
+            }
         }
 
         private void rbKeepGoing_CheckedChanged(object sender, EventArgs e)
@@ -409,5 +499,7 @@ namespace Sound2Play_Winform
             gravity = sbGravity.Value;
             lbGravity.Text = (sbGravity.Value).ToString();
         }
+
+
     }
 }

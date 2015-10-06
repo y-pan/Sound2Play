@@ -53,6 +53,7 @@
             this.sbSoundDivisor = new System.Windows.Forms.VScrollBar();
             this.btnGo = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.rbKeepGoing2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.ufo)).BeginInit();
             this.canvas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -62,7 +63,7 @@
             // 
             this.ufo.BackColor = System.Drawing.Color.Transparent;
             this.ufo.Image = ((System.Drawing.Image)(resources.GetObject("ufo.Image")));
-            this.ufo.Location = new System.Drawing.Point(668, 136);
+            this.ufo.Location = new System.Drawing.Point(545, 277);
             this.ufo.Name = "ufo";
             this.ufo.Size = new System.Drawing.Size(100, 84);
             this.ufo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -150,6 +151,7 @@
             this.canvas.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.canvas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("canvas.BackgroundImage")));
             this.canvas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.canvas.Controls.Add(this.rbKeepGoing2);
             this.canvas.Controls.Add(this.btnVoiceControl);
             this.canvas.Controls.Add(this.lbCompositUpForce);
             this.canvas.Controls.Add(this.lbGravity);
@@ -321,6 +323,18 @@
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
+            // rbKeepGoing2
+            // 
+            this.rbKeepGoing2.AutoSize = true;
+            this.rbKeepGoing2.Location = new System.Drawing.Point(215, 195);
+            this.rbKeepGoing2.Name = "rbKeepGoing2";
+            this.rbKeepGoing2.Size = new System.Drawing.Size(248, 24);
+            this.rbKeepGoing2.TabIndex = 19;
+            this.rbKeepGoing2.TabStop = true;
+            this.rbKeepGoing2.Text = "Sound Value Control Direction";
+            this.rbKeepGoing2.UseVisualStyleBackColor = true;
+            this.rbKeepGoing2.CheckedChanged += new System.EventHandler(this.rbKeepGoing2_CheckedChanged);
+            // 
             // Sound2Play
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -365,6 +379,7 @@
         private System.Windows.Forms.Label lbSoundDivisor;
         private System.Windows.Forms.Label lbCompositUpForce;
         private System.Windows.Forms.Button btnVoiceControl;
+        private System.Windows.Forms.RadioButton rbKeepGoing2;
     }
 }
 
